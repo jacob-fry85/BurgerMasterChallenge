@@ -6,14 +6,14 @@ public class Main {
 
         Hamburger burgerKing = new Hamburger("thick", 2, 3, "Whooper");
         HealthyBurger healthyBurger = new HealthyBurger("thick", 1,5,"Healthy Burger");
-
+        DeluxeBurger deluxeBurger = new DeluxeBurger("thick", 3,8,"Deluxe Burger");
 
         System.out.println("Welcome to Burger King Store!");
         System.out.println("*****************************");
         System.out.println("Which burger do you want?");
         System.out.println("1. Basic Burger. Price : " + burgerKing.getBurgerPrice());
         System.out.println("2. Healthy Burger. Price : " + healthyBurger.getBurgerPrice());
-        System.out.println("3. Deluxe Burger. Price : ");
+        System.out.println("3. Deluxe Burger. Price : " + deluxeBurger.getBurgerPrice());
         System.out.print("Your options? ");
 
         double totalCost = 0;
@@ -120,10 +120,42 @@ public class Main {
                     }
                 } while (additionAnswer == 'y');
                 totalCost = totalAdditionCost + healthyBurger.getBurgerPrice();
+            } if (chooseBurger == 3) {
+                System.out.println("Burger name : " + deluxeBurger.getName() + "\n" +
+                        "Meat : " + deluxeBurger.getMeat() + "\n" +
+                        "Breadroll type : " + deluxeBurger.getBreadRollType() + "\n" +
+                        "Burger price $" + deluxeBurger.getBurgerPrice());
+                do {
+                    System.out.print("Want Some Addition? Your answer(y/n) : ");
+                    additionAnswer = keyboard.next().charAt(0);
+                    if (additionAnswer == 'y') {
+                        System.out.println("Basic Burger Addition : ");
+                        System.out.println("1. " + deluxeBurger.getChips().getName() + " price : $" + deluxeBurger.getChips().getPrice());
+                        System.out.println("2. " + deluxeBurger.getDrinks().getName() + " price : $" + deluxeBurger.getDrinks().getPrice());
+
+                        System.out.println("Which number do you want? : ");
+                        chooseAdd = keyboard.nextInt();
+
+                        System.out.println("How many? : ");
+                        additionAmount = keyboard.nextDouble();
+
+                        System.out.println("chooseAdd : " + chooseAdd);
+                        switch (chooseAdd) {
+                            case 1:
+                                additionCost = additionAmount * deluxeBurger.getChips().getPrice();
+                                break;
+                            case 2:
+                                additionCost = additionAmount * deluxeBurger.getDrinks().getPrice();
+                                break;
+                        }
+                        System.out.println("add cost : " + additionCost);
+                        totalAdditionCost += additionCost;
+                        System.out.println("Total Addition Cost : " + totalAdditionCost);
+                    }
+                } while (additionAnswer == 'y');
+                totalCost = totalAdditionCost + deluxeBurger.getBurgerPrice();
             }
         }
-
-
 
         System.out.println("The total amount is :" + totalCost);
     }
